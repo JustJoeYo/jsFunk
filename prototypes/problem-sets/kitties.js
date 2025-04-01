@@ -1,9 +1,9 @@
-const { kitties } = require('../datasets/kitties');
-const { puppers } = require('../datasets/puppers');
+const { kitties } = require("../datasets/kitties");
+const { puppers } = require("../datasets/puppers");
 
 // To run the code you've written in this file, use node prototypes/problem-sets/kitties.js
 
-console.log('Running kitties.js')
+console.log("Running kitties.js");
 
 /* Kitty Prompts*/
 
@@ -23,6 +23,16 @@ Annotate:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
 
+function findOrangeNames(data) {
+  // find which kittens are orange
+  let orangeKitties = data.filter((kitten) => kitten.color === "orange");
+  // need to now go through all the cats left and grab there name to use for the return
+  let orangeKittyNames = orangeKitties.map((kitten) => kitten.name);
+  // return it
+  return orangeKittyNames;
+}
+
+//console.log(findOrangeNames());
 
 /*
 Level 2
@@ -56,6 +66,16 @@ Annotation:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
 
+function sortByAge(data) {
+  // copy original array before we mutilate it
+  let sortedKittens = [...data];
+  // sort the kittens by age descending
+  sortedKittens.sort((a, b) => b.age - a.age);
+  // return new array
+  return sortedKittens;
+}
+
+//console.log(sortByAge());
 
 /*
 Level 3
@@ -83,7 +103,25 @@ e.g.
 Annotation:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
-  
+
+function growUp(data) {
+  //let olderKitties = [...kitties];
+
+  //olderKitties.forEach((kitten) => (kitten.age += 2));
+
+  // use map to create a new array with older kitties
+  let olderKitties = data.map((kitty) => {
+    // create a copy of each kitty object with the age increased by 2
+    return { ...kitty, age: kitty.age + 2 };
+  });
+
+  // had to change this so it sorts oldest to youngest, going to mutilate it.
+  olderKitties.sort((a, b) => b.age - a.age);
+  // return new array
+  return olderKitties;
+}
+
+//console.log(growUp());
 
 /*
 Level 4
@@ -136,6 +174,14 @@ Annotation:
   Jot down any takeaways, questions, or reflections about this refactoring.
 */
 
+// console.log("kitten: ", findOrangeNames(kitties));
+// console.log(findOrangeNames(puppers));
+// console.log("kitten: ", sortByAge(kitties));
+// console.log(sortByAge(puppers));
+// console.log("kitten: ", growUp(kitties));
+// console.log(growUp(puppers));
+
+// didnt have to really change anything, just gave each of them one param to use for what data you feed it.
 
 /*
 Level 5
@@ -151,12 +197,8 @@ Annotation:
   Take notes on the error messages that led you to fixing those details. 
 */
 
-
-
-
-
-// module.exports = {
-//   findOrangeNames,
-//   sortByAge,
-//   growUp
-// };
+module.exports = {
+  findOrangeNames,
+  sortByAge,
+  growUp,
+};
